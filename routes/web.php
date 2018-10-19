@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify' => true]);
+
+Route::get('/', 'AppController@index')->middleware('verified');
+
+
+// Create Tracking Period
+
+Route::post('/create', 'TrackingPeriodController@store');
+
+Route::get('/checkActivePeriod', 'TrackingPeriodController@checkActivePeriod');
