@@ -27,3 +27,5 @@ Route::get('/', 'AppController@index')->middleware('verified');
 Route::post('/create', 'TrackingPeriodController@store');
 
 Route::get('/checkActivePeriod', 'TrackingPeriodController@checkActivePeriod');
+
+Route::get('/trackingdays/{tracking_period_id}', 'TrackingDayController@show');

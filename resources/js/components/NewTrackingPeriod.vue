@@ -109,7 +109,6 @@
                     showConfirmButton: false,
                     timer: 1500
                 });
-                //this.emitTrackingPeriodCreatedEvent();
             },
             emitTrackingPeriodCreatedEvent() {
                 

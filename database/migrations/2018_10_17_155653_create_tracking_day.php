@@ -21,7 +21,7 @@ class CreateTrackingDay extends Migration
             $table->dateTime('measure_datetime');
             
 
-            $table->foreign('tracking_period_id')->references('id')->on('tracking_period');
+            $table->foreign('tracking_period_id')->references('id')->on('tracking_period')->onDelete('cascade');;
             $table->unique('measure_datetime');
         });
     }

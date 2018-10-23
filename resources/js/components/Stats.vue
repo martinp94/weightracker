@@ -3,11 +3,9 @@
 
         <transition
             appear
-            name="custom"
-            enter-class=""
             enter-active-class="animated bounceInUp"> 
 
-            <div class="stats" v-if="show">
+            <div class="stats" v-if="show" style="background-color: #eee ;">
                 <div>
                    <img width="64" src="/images/scale.png" alt="">
                 </div>
@@ -35,6 +33,11 @@
             </div>
             
         </transition>
+
+        <div v-if="show">
+            <tracking-days :tracking_period_id="period.id"></tracking-days>
+        </div>
+        
 
     </div>
 </template>

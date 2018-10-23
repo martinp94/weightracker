@@ -30,5 +30,10 @@ class TrackingPeriod extends Model
     {
         return $this->status == true;
     }
+
+    public function days()
+    {
+        return $this->hasMany('App\TrackingDay', 'tracking_period_id', 'id');
+    }
     
 }
