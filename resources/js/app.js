@@ -32,6 +32,10 @@ Vue.component(
     'tracking-days', require('./components/TrackingDays.vue')
 );
 
+Vue.component(
+    'add-tracking-today', require('./components/TrackingToday.vue')
+);
+
 // Import vform
 
 import { Form, HasError, AlertError } from 'vform';

@@ -7,7 +7,7 @@
 
             <div class="card" :style="animationDuration">
                 <div class="card-header" :style="progressColor">
-                    <span class="float-left toggle"><h2>{{ day.measure_datetime }}</h2></span>
+                    <span class="float-left toggle"><h2>{{ day.measure_date }}</h2></span>
                     <span class="float-right toggle" @click="toggle"><h2>{{ toggleText }}</h2></span>
                 </div>
                 <div class="card-header grid-header" v-if="show">
@@ -105,7 +105,6 @@
             }
         },
         mounted() {
-            console.log(this.slideDuration)
         }
         
     }

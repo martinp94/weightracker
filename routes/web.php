@@ -29,3 +29,7 @@ Route::post('/create', 'TrackingPeriodController@store');
 Route::get('/checkActivePeriod', 'TrackingPeriodController@checkActivePeriod');
 
 Route::get('/trackingdays/{tracking_period_id}', 'TrackingDayController@show');
+
+Route::post('/newWeight', 'TrackingDayController@store');
+
+Route::get('/checkTodayEntry', 'TrackingDayController@checkTodayEntry');

@@ -14344,8 +14344,6 @@ Vue.component('tracking-day', __webpack_require__(55));
 
 Vue.component('tracking-days', __webpack_require__(60));
 
-Vue.component('add-tracking-today', __webpack_require__(73));
-
 // Import vform
 
 
@@ -47910,7 +47908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         create: function create() {
             var _this = this;
 
-            this.form.post('/create').then(function (data) {
+            this.form.post('/weightracker/create').then(function (data) {
                 console.log(data);
                 _this.onCompleted();
             }).catch(function (error) {
@@ -48259,13 +48257,13 @@ var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5c26ffc1", content, false, {});
+var update = __webpack_require__(3)("6fefbdf2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56c7d5c4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stats.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56c7d5c4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stats.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56c7d5c4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stats.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56c7d5c4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Stats.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -48283,7 +48281,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.stats[data-v-56c7d5c4] {\n  padding: 1em;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 1vh;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.stats[data-v-56c7d5c4] {\r\n    \r\n    padding: 1em;\r\n    width: 100%;\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\r\n    font-size: 1vh;\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr 1fr;\r\n    text-align: center;\n}\r\n    \r\n", ""]);
 
 // exports
 
@@ -48355,14 +48353,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // Show Stats if active period exists
 
-            axios.get('/checkActivePeriod').then(function (response) {
+            axios.get('/weightracker/checkActivePeriod').then(function (response) {
 
                 if (response.data.message === true) {
                     _this.period = response.data.period;
                     _this.period_type = _this.period.desired_weight === null ? 'timed' : 'to_weight';
                     _this.show = true;
                 }
-            }).catch(function (error) {});
+            }).catch(function (error) {
+                return console.log(error);
+            });
         }
     },
     mounted: function mounted() {
@@ -48393,67 +48393,80 @@ var render = function() {
         { attrs: { appear: "", "enter-active-class": "animated bounceInUp" } },
         [
           _vm.show
-            ? _c("div", { staticClass: "stats" }, [
-                _c("div", [
-                  _c("img", {
-                    attrs: { width: "64", src: "/images/scale.png", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm.period_type == "timed"
-                  ? _c("div", [
-                      _c("img", {
-                        attrs: { width: "64", src: "/images/date.png", alt: "" }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.period_type == "to_weight"
-                  ? _c("div", [
-                      _c("img", {
-                        attrs: {
-                          width: "64",
-                          src: "/images/scale.png",
-                          alt: ""
-                        }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", [
-                  _c("img", {
-                    attrs: {
-                      width: "64",
-                      src: "/images/improvement.png",
-                      alt: ""
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("h1", [
-                    _vm._v(" " + _vm._s(_vm.period.initial_weight) + " ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.period_type == "timed"
-                  ? _c("div", [
-                      _c("h1", [
-                        _vm._v(" " + _vm._s(_vm.period.tracking_end_date) + " ")
+            ? _c(
+                "div",
+                {
+                  staticClass: "stats",
+                  staticStyle: { "background-color": "#eee" }
+                },
+                [
+                  _c("div", [
+                    _c("img", {
+                      attrs: { width: "64", src: "/images/scale.png", alt: "" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.period_type == "timed"
+                    ? _c("div", [
+                        _c("img", {
+                          attrs: {
+                            width: "64",
+                            src: "/images/date.png",
+                            alt: ""
+                          }
+                        })
                       ])
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.period_type == "to_weight"
-                  ? _c("div", [
-                      _c("h1", [
-                        _vm._v(" " + _vm._s(_vm.period.desired_weight) + " ")
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.period_type == "to_weight"
+                    ? _c("div", [
+                        _c("img", {
+                          attrs: {
+                            width: "64",
+                            src: "/images/scale.png",
+                            alt: ""
+                          }
+                        })
                       ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("img", {
+                      attrs: {
+                        width: "64",
+                        src: "/images/improvement.png",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h1", [
+                      _vm._v(" " + _vm._s(_vm.period.initial_weight) + " ")
                     ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", [_c("h1", [_vm._v(" 200g/d ")])])
-              ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.period_type == "timed"
+                    ? _c("div", [
+                        _c("h1", [
+                          _vm._v(
+                            " " + _vm._s(_vm.period.tracking_end_date) + " "
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.period_type == "to_weight"
+                    ? _c("div", [
+                        _c("h1", [
+                          _vm._v(" " + _vm._s(_vm.period.desired_weight) + " ")
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", [_c("h1", [_vm._v(" 200g/d ")])])
+                ]
+              )
             : _vm._e()
         ]
       ),
@@ -48679,7 +48692,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     },
-    mounted: function mounted() {}
+    mounted: function mounted() {
+        console.log(this.slideDuration);
+    }
 });
 
 /***/ }),
@@ -48704,7 +48719,7 @@ var render = function() {
               { staticClass: "card-header", style: _vm.progressColor },
               [
                 _c("span", { staticClass: "float-left toggle" }, [
-                  _c("h2", [_vm._v(_vm._s(_vm.day.measure_date))])
+                  _c("h2", [_vm._v(_vm._s(_vm.day.measure_datetime))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -48909,8 +48924,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48925,10 +48938,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         loadDays: function loadDays() {
             var _this = this;
 
-            axios.get('/trackingdays/' + this.tracking_period_id).then(function (response) {
+            axios.get('/weightracker/trackingdays/' + this.tracking_period_id).then(function (response) {
+                console.log(response);
                 _this.days = response.data.days;
             }).catch(function (error) {
-                console.log(error.response);
+                console.log(error);
             });
         },
         calculateWeightDifference: function calculateWeightDifference(key) {
@@ -48952,24 +48966,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c("add-tracking-today", {
-        attrs: { tracking_period_id: _vm.tracking_period_id }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.days, function(day, key) {
-        return _c("tracking-day", {
-          key: key,
-          staticClass: "container my-3",
-          attrs: {
-            day: day,
-            kgDiff: _vm.calculateWeightDifference(key),
-            slideDuration: key + 1
-          }
-        })
+    _vm._l(_vm.days, function(day, key) {
+      return _c("tracking-day", {
+        key: key,
+        staticClass: "container my-3",
+        attrs: {
+          day: day,
+          kgDiff: _vm.calculateWeightDifference(key),
+          slideDuration: key + 1
+        }
       })
-    ],
-    2
+    })
   )
 }
 var staticRenderFns = []
@@ -55239,302 +55246,6 @@ var progressRYG = function progressRYG(progress) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(74)
-}
-var normalizeComponent = __webpack_require__(4)
-/* script */
-var __vue_script__ = __webpack_require__(76)
-/* template */
-var __vue_template__ = __webpack_require__(77)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-794ed16f"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/TrackingToday.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-794ed16f", Component.options)
-  } else {
-    hotAPI.reload("data-v-794ed16f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(75);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("09843c78", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fade-enter[data-v-794ed16f] {\n    opacity: 0;\n}\n.fade-enter-active[data-v-794ed16f] {\n    -webkit-transition: opacity 1s;\n    transition: opacity 1s;\n}\n.fade-leave-active[data-v-794ed16f] {\n    -webkit-transition: opacity 2s;\n    transition: opacity 2s;\n    opacity: 0;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tracking_period_id'],
-    data: function data() {
-        return {
-            todayWeightEntered: true,
-            form: new Form({
-                tracking_period_id: this.tracking_period_id,
-                weight: 0
-            })
-        };
-    },
-
-    methods: {
-        create: function create() {
-            var _this = this;
-
-            this.form.post('/newWeight').then(function (data) {
-                _this.onCompleted();
-                console.log(data);
-            }).catch(function (error) {
-                if (error.response.data.errorCode == '23000') {
-                    sweetalert({
-                        position: 'top-end',
-                        type: 'warning',
-                        title: "You have already entered today's weight, please try again tomorrow.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            });
-        },
-        onCompleted: function onCompleted() {
-            this.todayWeightEntered = true;
-            sweetalert({
-                position: 'top-end',
-                type: 'success',
-                title: "Today's weight entered successfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        },
-        emitTodayWeightEnteredEvent: function emitTodayWeightEnteredEvent() {
-            EventBus.$emit('todayWeightEntered', true);
-        },
-        isTodayWeightEntered: function isTodayWeightEntered() {
-            var _this2 = this;
-
-            axios.get('/checkTodayEntry').then(function (response) {
-                if (response.data) {
-                    _this2.todayWeightEntered = response.data.dayExists ? true : false;
-                }
-            }).catch(function (error) {
-                console.log(error.response);
-            });
-        }
-    },
-    mounted: function mounted() {
-        this.isTodayWeightEntered();
-    }
-});
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container text-center my-3" },
-    [
-      _c(
-        "transition",
-        {
-          attrs: { name: "fade", appear: "" },
-          on: { "after-leave": _vm.emitTodayWeightEnteredEvent }
-        },
-        [
-          !_vm.todayWeightEntered
-            ? _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.create($event)
-                    },
-                    keydown: function($event) {
-                      _vm.form.onKeydown($event)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _c("label", { attrs: { id: "type" } }, [
-                        _vm._v("Enter today's weight")
-                      ]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.weight,
-                            expression: "form.weight"
-                          }
-                        ],
-                        class: { "is-invalid": _vm.form.errors.has("weight") },
-                        attrs: { type: "number", name: "weight" },
-                        domProps: { value: _vm.form.weight },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "weight", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("has-error", {
-                        attrs: { form: _vm.form, field: "weight" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary form-control",
-                        attrs: { disabled: _vm.form.busy, type: "submit" }
-                      },
-                      [_vm._v("Submit")]
-                    )
-                  ])
-                ]
-              )
-            : _vm._e()
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-794ed16f", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

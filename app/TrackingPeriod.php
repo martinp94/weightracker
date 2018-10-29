@@ -33,7 +33,7 @@ class TrackingPeriod extends Model
 
     public function days()
     {
-        return $this->hasMany('App\TrackingDay', 'tracking_period_id', 'id');
+        return $this->hasMany('App\TrackingDay', 'tracking_period_id', 'id')->orderBy('measure_date');
     }
     
 }

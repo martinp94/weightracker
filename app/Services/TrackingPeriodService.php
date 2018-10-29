@@ -29,7 +29,7 @@ class TrackingPeriodService
                 TrackingDay::create([
                     'tracking_period_id' => $createdPeriod->id, 
                     'weight' => $createdPeriod->initial_weight, 
-                    'measure_datetime' => $createdPeriod->created_at,
+                    'measure_date' => \Carbon\Carbon::parse($createdPeriod->created_at)->format('Y-m-d'),
                 ]);
             }
             catch (\Exception $e) 
@@ -82,6 +82,25 @@ class TrackingPeriodService
         return $this->store($data);
         
     }
+    
+    public function storeNewWeight($tracking_period_id, $weight) 
+    {
+        try 
+        {
+            TrackingDay::create([
+                'tracking_period_id' => $tracking_period_id, 
+                'weight' => $weight, 
+                'measure_date' => \Carbon\Carbon::today(),
+            ]);
+
+            return response()->json(['message' => 'success'], 200);
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['errorCode' => $e->errorInfo[0]], 422);
+        }
+
+    }
 
     private function formatDate($date) 
     {
@@ -95,20 +114,23 @@ class TrackingPeriodService
         return ceil(($daysPassed/$totalDays) * 100);
     }
 
-    private function calculateToWeightProgress()
+    private function calculateToWeightProgress($initialWeight, $desiredWeight, $currentWeight)
     {
-        
+        $weightToLose = $initialWeight - $desiredWeight;
+        $weightLost = $initialWeight - $currentWeight;
+
+        return ceil(($weightLost/$weightToLose) * 100);
     }
 
     private function calculateProgress(TrackingPeriod $period, TrackingDay $day) 
     {
         if($period->desired_weight == null)
         {
-            return $this->calculateTimedProgress($period->created_at, $period->tracking_end_date, $day->measure_datetime);
+            return $this->calculateTimedProgress($period->created_at, $period->tracking_end_date, $day->measure_date);
         }
         else
         {
-            return $this->calculateToWeightProgress();
+            return $this->calculateToWeightProgress($period->initial_weight, $period->desired_weight, $day->weight);
         }
         
     }
@@ -134,5 +156,10 @@ class TrackingPeriodService
     public function activePeriodExists() 
     {
         return TrackingPeriod::where('user_id', '=', Auth::user()->id)->where('status', '=', true)->count() ? true : false;
+    }
+
+    public function todayEntryExists() 
+    {
+        return TrackingDay::where('measure_date', '=', \Carbon\Carbon::today())->count() ? true : false;
     }
 }

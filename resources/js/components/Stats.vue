@@ -5,7 +5,7 @@
             appear
             enter-active-class="animated bounceInUp"> 
 
-            <div class="stats" v-if="show" style="background-color: #eee ;">
+            <div class="stats" v-if="show">
                 <div>
                    <img width="64" src="/images/scale.png" alt="">
                 </div>
@@ -66,7 +66,7 @@
                     }
                         
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => { });
             }
         },
         mounted() {
@@ -82,10 +82,10 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .stats {
-    
+      
     padding: 1em;
     width: 100%;
     box-sizing: border-box;
@@ -93,6 +93,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
-}
+  }
     
 </style>

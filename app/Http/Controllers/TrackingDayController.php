@@ -33,9 +33,14 @@ class TrackingDayController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, TrackingPeriodService $trackingPeriodService)
     {
-        //
+        return $trackingPeriodService->storeNewWeight($request->tracking_period_id, $request->weight);
+    }
+
+    public function checkTodayEntry(TrackingPeriodService $trackingPeriodService) 
+    {
+        return response()->json(['dayExists' => $trackingPeriodService->todayEntryExists()]);
     }
 
 

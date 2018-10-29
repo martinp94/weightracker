@@ -1,5 +1,7 @@
 <template>
     <div> 
+
+        <add-tracking-today :tracking_period_id="tracking_period_id"></add-tracking-today>
     
         <tracking-day class="container my-3"  v-for="(day, key) in days" 
                                             :key="key" 
@@ -25,11 +27,10 @@
             loadDays() {
                 axios.get(`/trackingdays/${this.tracking_period_id}`)
                     .then((response) => {
-                        console.log(response);
                         this.days = response.data.days;
                     })
                     .catch((error) => {
-                        console.log(error);
+                        console.log(error.response)
                     });
             },
             calculateWeightDifference(key) {
