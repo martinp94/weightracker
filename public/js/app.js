@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -483,7 +456,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -711,7 +684,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -817,6 +790,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -3462,7 +3462,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
 /* 7 */
@@ -14304,7 +14304,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(69);
+module.exports = __webpack_require__(79);
 
 
 /***/ }),
@@ -14313,12 +14313,12 @@ module.exports = __webpack_require__(69);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vform__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vform__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vform___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vform__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_sweetalert2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_progressColor_js__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_progressColor_js__ = __webpack_require__(78);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14344,7 +14344,9 @@ Vue.component('tracking-day', __webpack_require__(55));
 
 Vue.component('tracking-days', __webpack_require__(60));
 
-Vue.component('add-tracking-today', __webpack_require__(73));
+Vue.component('add-tracking-today', __webpack_require__(65));
+
+Vue.component('weight-input', __webpack_require__(70));
 
 // Import vform
 
@@ -31553,7 +31555,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(19)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(19)(module)))
 
 /***/ }),
 /* 19 */
@@ -47379,7 +47381,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(40).setImmediate))
 
 /***/ }),
 /* 40 */
@@ -47449,7 +47451,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 41 */
@@ -47642,7 +47644,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(10)))
 
 /***/ }),
 /* 42 */
@@ -47654,7 +47656,7 @@ function injectStyle (ssrContext) {
   __webpack_require__(43)
   __webpack_require__(46)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(48)
 /* template */
@@ -47707,7 +47709,7 @@ var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("a8932a94", content, false, {});
+var update = __webpack_require__(2)("a8932a94", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -47726,12 +47728,12 @@ if(false) {
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.calendar-header-size > header {\n    height: 10vh;\n    background: rgba(12, 231, 247, 0.685);\n}\n", ""]);
+exports.push([module.i, "\n.calendar-header-size > header {\n    height: 3rem;\n    background: rgba(12, 231, 247, 0.685);\n}\n", ""]);
 
 // exports
 
@@ -47780,7 +47782,7 @@ var content = __webpack_require__(47);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5f65628c", content, false, {});
+var update = __webpack_require__(2)("5f65628c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -47799,7 +47801,7 @@ if(false) {
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
@@ -47815,7 +47817,6 @@ exports.push([module.i, "\n.fade-enter[data-v-251c0b86] {\n    opacity: 0;\n}\n.
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -47903,7 +47904,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    watch: {
+        'form.initialWeight': function formInitialWeight(val) {
+            console.log(val);
+        }
+    },
     methods: {
+        updateInitialWeight: function updateInitialWeight(val) {
+            if (val) this.form.initialWeight = parseFloat(val.replace(',', '.'));
+        },
+        updateDesiredWeight: function updateDesiredWeight(val) {
+            if (val) this.form.desiredWeight = parseFloat(val.replace(',', '.'));
+        },
         updateEndDate: function updateEndDate(event) {
             this.form.endDate = event;
         },
@@ -47931,10 +47943,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             EventBus.$emit('trackingPeriodCreated', true);
         }
-    },
-    mounted: function mounted() {
-        console.log('Component mounted.');
     }
+
 });
 
 /***/ }),
@@ -48050,38 +48060,13 @@ var render = function() {
                             _vm._v("Enter your weight")
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.initialWeight,
-                                expression: "form.initialWeight"
-                              }
-                            ],
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "initial_weight"
-                              )
-                            },
-                            attrs: { type: "number", name: "initial_weight" },
-                            domProps: { value: _vm.form.initialWeight },
+                          _c("weight-input", {
+                            attrs: { name: "initial_weight", focus: true },
                             on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.form,
-                                  "initialWeight",
-                                  $event.target.value
-                                )
+                              change: function($event) {
+                                _vm.updateInitialWeight($event)
                               }
                             }
-                          }),
-                          _vm._v(" kg\n                "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "initial_weight" }
                           })
                         ],
                         1
@@ -48097,38 +48082,13 @@ var render = function() {
                             _vm._v("Enter desired weight")
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.desiredWeight,
-                                expression: "form.desiredWeight"
-                              }
-                            ],
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "desired_weight"
-                              )
-                            },
-                            attrs: { type: "number", name: "desired_weight" },
-                            domProps: { value: _vm.form.desiredWeight },
+                          _c("weight-input", {
+                            attrs: { name: "desired_weight", focus: false },
                             on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.form,
-                                  "desiredWeight",
-                                  $event.target.value
-                                )
+                              change: function($event) {
+                                _vm.updateDesiredWeight($event)
                               }
                             }
-                          }),
-                          _vm._v(" kg\n                "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "desired_weight" }
                           })
                         ],
                         1
@@ -48206,7 +48166,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(51)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(53)
 /* template */
@@ -48259,7 +48219,7 @@ var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5c26ffc1", content, false, {});
+var update = __webpack_require__(2)("5c26ffc1", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -48278,7 +48238,7 @@ if(false) {
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
@@ -48492,7 +48452,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(56)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(58)
 /* template */
@@ -48545,7 +48505,7 @@ var content = __webpack_require__(57);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5ebc33d0", content, false, {});
+var update = __webpack_require__(2)("5ebc33d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -48564,7 +48524,7 @@ if(false) {
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
@@ -48807,7 +48767,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(61)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(63)
 /* template */
@@ -48860,7 +48820,7 @@ var content = __webpack_require__(62);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("530fb5c8", content, false, {});
+var update = __webpack_require__(2)("530fb5c8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -48879,7 +48839,7 @@ if(false) {
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
@@ -48984,6 +48944,510 @@ if (false) {
 
 /***/ }),
 /* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(66)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(68)
+/* template */
+var __vue_template__ = __webpack_require__(69)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-794ed16f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TrackingToday.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-794ed16f", Component.options)
+  } else {
+    hotAPI.reload("data-v-794ed16f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(67);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("09843c78", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fade-enter[data-v-794ed16f] {\n    opacity: 0;\n}\n.fade-enter-active[data-v-794ed16f] {\n    -webkit-transition: opacity 1s;\n    transition: opacity 1s;\n}\n.fade-leave-active[data-v-794ed16f] {\n    -webkit-transition: opacity 2s;\n    transition: opacity 2s;\n    opacity: 0;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tracking_period_id'],
+    data: function data() {
+        return {
+            todayWeightEntered: true,
+            form: new Form({
+                tracking_period_id: this.tracking_period_id,
+                weight: 0
+            })
+        };
+    },
+
+    methods: {
+        updateWeight: function updateWeight(val) {
+            this.form.weight = parseFloat(val.replace(',', '.'));
+        },
+        create: function create() {
+            var _this = this;
+
+            this.form.post('/newWeight').then(function (data) {
+                _this.onCompleted();
+                console.log(data);
+            }).catch(function (error) {
+                if (error.response.data.errorCode == '23000') {
+                    sweetalert({
+                        position: 'top-end',
+                        type: 'warning',
+                        title: "You have already entered today's weight, please try again tomorrow.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        },
+        onCompleted: function onCompleted() {
+            this.todayWeightEntered = true;
+            sweetalert({
+                position: 'top-end',
+                type: 'success',
+                title: "Today's weight entered successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        emitTodayWeightEnteredEvent: function emitTodayWeightEnteredEvent() {
+            EventBus.$emit('todayWeightEntered', true);
+        },
+        isTodayWeightEntered: function isTodayWeightEntered() {
+            var _this2 = this;
+
+            axios.get('/checkTodayEntry').then(function (response) {
+                if (response.data) {
+                    _this2.todayWeightEntered = response.data.dayExists ? true : false;
+                }
+            }).catch(function (error) {
+                console.log(error.response);
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.isTodayWeightEntered();
+    }
+});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container text-center my-3" },
+    [
+      _c(
+        "transition",
+        {
+          attrs: { name: "fade", appear: "" },
+          on: { "after-leave": _vm.emitTodayWeightEnteredEvent }
+        },
+        [
+          !_vm.todayWeightEntered
+            ? _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.create($event)
+                    },
+                    keydown: function($event) {
+                      _vm.form.onKeydown($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", { attrs: { id: "type" } }, [
+                        _vm._v("Enter today's weight")
+                      ]),
+                      _vm._v(" "),
+                      _c("weight-input", {
+                        attrs: { name: "weight", focus: true },
+                        on: {
+                          change: function($event) {
+                            _vm.updateWeight($event)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary form-control",
+                        attrs: { disabled: _vm.form.busy, type: "submit" }
+                      },
+                      [_vm._v("Submit")]
+                    )
+                  ])
+                ]
+              )
+            : _vm._e()
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-794ed16f", module.exports)
+  }
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(71)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(73)
+/* template */
+var __vue_template__ = __webpack_require__(74)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-789cfbd2"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/WeightInput.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-789cfbd2", Component.options)
+  } else {
+    hotAPI.reload("data-v-789cfbd2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(72);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("cfc4bcee", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-789cfbd2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./WeightInput.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-789cfbd2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./WeightInput.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@font-face {\n  font-family: \"Digital\";\n  src: url(\"/fonts/digital-7.ttf\");\n}\n.weightInput[data-v-789cfbd2] {\n  outline: none;\n  font-size: 2rem;\n}\n.weightInput input[data-v-789cfbd2] {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    font-size: inherit;\n    border-radius: .6em;\n    outline: none;\n    font-family: 'Digital', 'Nunito', sans-serif;\n}\n.weightInput .input-error[data-v-789cfbd2] {\n    margin-left: 1rem;\n    display: inline;\n    color: red;\n    font-size: .7rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['name', 'focus'],
+    data: function data() {
+        return {
+            inputWidth: 24,
+            weight: '0',
+            error: {
+                message: ''
+            }
+        };
+    },
+
+    methods: {
+        inputHandler: function inputHandler() {
+            if (this.validateInput()) {
+                this.formatInput();
+                this.$emit('change', this.weight);
+            }
+        },
+        formatInput: function formatInput() {
+
+            // if input length is 0, set value to 0
+            // We check if current lenght is 1 and user presses backspace(keycode 8)
+
+            if (this.weight.length === 0) this.weight = 0;
+
+            // if length is greater than 1, put comma before last number
+            // and change first value if it is 0 (ex. 045 -> 45)
+
+            if (this.weight.length > 1) {
+                this.weight = this.weight.replace(',', '');
+
+                if (this.weight.charAt(0) == '0') {
+                    this.weight = this.weight.replace('0', '');
+                }
+
+                // check for length again if replacing changed length to 1
+                if (this.weight.length > 1) {
+                    var curr = this.weight.split('');
+                    curr.splice(this.weight.length - 1, 0, ',');
+                    this.weight = curr.join('');
+                }
+            }
+            this.updateInputWidth();
+        },
+        updateInputWidth: function updateInputWidth() {
+            var inputLength = this.weight.length;
+            var newWidth = this.weight.length <= 1 ? 24 : 19 * (inputLength - 1);
+            this.inputWidth = newWidth;
+        },
+        validateInput: function validateInput() {
+
+            if (!Number(this.weight.replace(",", ".")) && this.weight != 0) {
+                this.error.message = 'Invalid input: only numeric characters supported!';
+                return false;
+            }
+
+            if (this.weight.length > 8) {
+                this.error.message = 'Max value: 999999,9';
+                return false;
+            }
+
+            this.error.message = '';
+            return true;
+        }
+    },
+    mounted: function mounted() {
+        if (this.focus) this.$el.children[0].focus();
+    }
+});
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "weightInput" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.weight,
+          expression: "weight"
+        }
+      ],
+      style: { width: _vm.inputWidth + "px" },
+      attrs: { focus: "", type: "text", name: _vm.name },
+      domProps: { value: _vm.weight },
+      on: {
+        keyup: _vm.inputHandler,
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.weight = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" kg\n\n    "),
+    _c("div", { staticClass: "input-error" }, [
+      _vm._v(_vm._s(_vm.error.message))
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-789cfbd2", module.exports)
+  }
+}
+
+/***/ }),
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports =
@@ -49966,7 +50430,7 @@ var AlertSuccess_Component = normalizeComponent(
 /******/ });
 
 /***/ }),
-/* 66 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51450,7 +51914,7 @@ var Datepicker = {render: function(){var _vm=this;var _h=_vm.$createElement;var 
 
 
 /***/ }),
-/* 67 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -55214,7 +55678,7 @@ if (typeof window !== 'undefined' && window.Sweetalert2){  window.Sweetalert2.ve
 "      position: initial !important; } }");
 
 /***/ }),
-/* 68 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55235,306 +55699,10 @@ var progressRYG = function progressRYG(progress) {
 };
 
 /***/ }),
-/* 69 */
+/* 79 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(74)
-}
-var normalizeComponent = __webpack_require__(4)
-/* script */
-var __vue_script__ = __webpack_require__(76)
-/* template */
-var __vue_template__ = __webpack_require__(77)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-794ed16f"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/TrackingToday.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-794ed16f", Component.options)
-  } else {
-    hotAPI.reload("data-v-794ed16f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(75);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("09843c78", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-794ed16f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TrackingToday.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fade-enter[data-v-794ed16f] {\n    opacity: 0;\n}\n.fade-enter-active[data-v-794ed16f] {\n    -webkit-transition: opacity 1s;\n    transition: opacity 1s;\n}\n.fade-leave-active[data-v-794ed16f] {\n    -webkit-transition: opacity 2s;\n    transition: opacity 2s;\n    opacity: 0;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tracking_period_id'],
-    data: function data() {
-        return {
-            todayWeightEntered: true,
-            form: new Form({
-                tracking_period_id: this.tracking_period_id,
-                weight: 0
-            })
-        };
-    },
-
-    methods: {
-        create: function create() {
-            var _this = this;
-
-            this.form.post('/newWeight').then(function (data) {
-                _this.onCompleted();
-                console.log(data);
-            }).catch(function (error) {
-                if (error.response.data.errorCode == '23000') {
-                    sweetalert({
-                        position: 'top-end',
-                        type: 'warning',
-                        title: "You have already entered today's weight, please try again tomorrow.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            });
-        },
-        onCompleted: function onCompleted() {
-            this.todayWeightEntered = true;
-            sweetalert({
-                position: 'top-end',
-                type: 'success',
-                title: "Today's weight entered successfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        },
-        emitTodayWeightEnteredEvent: function emitTodayWeightEnteredEvent() {
-            EventBus.$emit('todayWeightEntered', true);
-        },
-        isTodayWeightEntered: function isTodayWeightEntered() {
-            var _this2 = this;
-
-            axios.get('/checkTodayEntry').then(function (response) {
-                if (response.data) {
-                    _this2.todayWeightEntered = response.data.dayExists ? true : false;
-                }
-            }).catch(function (error) {
-                console.log(error.response);
-            });
-        }
-    },
-    mounted: function mounted() {
-        this.isTodayWeightEntered();
-    }
-});
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container text-center my-3" },
-    [
-      _c(
-        "transition",
-        {
-          attrs: { name: "fade", appear: "" },
-          on: { "after-leave": _vm.emitTodayWeightEnteredEvent }
-        },
-        [
-          !_vm.todayWeightEntered
-            ? _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.create($event)
-                    },
-                    keydown: function($event) {
-                      _vm.form.onKeydown($event)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _c("label", { attrs: { id: "type" } }, [
-                        _vm._v("Enter today's weight")
-                      ]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.weight,
-                            expression: "form.weight"
-                          }
-                        ],
-                        class: { "is-invalid": _vm.form.errors.has("weight") },
-                        attrs: { type: "number", name: "weight" },
-                        domProps: { value: _vm.form.weight },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "weight", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("has-error", {
-                        attrs: { form: _vm.form, field: "weight" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary form-control",
-                        attrs: { disabled: _vm.form.busy, type: "submit" }
-                      },
-                      [_vm._v("Submit")]
-                    )
-                  ])
-                ]
-              )
-            : _vm._e()
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-794ed16f", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

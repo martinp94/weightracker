@@ -11,10 +11,7 @@
                 <div class="form-group">
                 
                     <label id="type">Enter today's weight</label>
-                    <br>
-                    <input class="" v-model="form.weight" type="number" name="weight"
-                        :class="{ 'is-invalid': form.errors.has('weight') }">
-                    <has-error :form="form" field="weight"></has-error>
+                    <weight-input name="weight" :focus="true" @change="updateWeight($event)"></weight-input>
 
                 </div>
 
@@ -43,6 +40,9 @@
             }
         },
         methods: {
+            updateWeight(val) {
+                this.form.weight = parseFloat(val.replace(',', '.'));
+            },
             create() {
                 this.form.post('/newWeight')
                 .then(( data ) => { 

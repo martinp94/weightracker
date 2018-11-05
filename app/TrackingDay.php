@@ -14,7 +14,7 @@ class TrackingDay extends Model
     protected $fillable = [
         'tracking_period_id', 
         'weight', 
-        'measure_datetime',
+        'measure_date',
     ];
     
     /**

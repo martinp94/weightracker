@@ -26,21 +26,20 @@
                 
                 <has-error :form="form" field="type"></has-error>
 
-            
                 </div>
 
                 <div class="form-group" v-if="typeSelected">
+
                     <label for="initial_weight">Enter your weight</label>
-                    <input v-model="form.initialWeight" type="number" name="initial_weight"
-                        :class="{ 'is-invalid': form.errors.has('initial_weight') }"> kg
-                    <has-error :form="form" field="initial_weight"></has-error>
+                    <weight-input name="initial_weight" :focus="true" @change="updateInitialWeight($event)"></weight-input>
+
                 </div>
 
                 <div class="form-group" v-if="typeSelected && form.type === 'to_weight'">
+
                     <label for="desired_weight">Enter desired weight</label>
-                    <input v-model="form.desiredWeight" type="number" name="desired_weight"
-                        :class="{ 'is-invalid': form.errors.has('desired_weight') }"> kg
-                    <has-error :form="form" field="desired_weight"></has-error>
+                    <weight-input name="desired_weight" :focus="false" @change="updateDesiredWeight($event)"></weight-input>
+                    
                 </div>
 
                 <div class="form-group" v-if="typeSelected && form.type === 'timed'">
@@ -86,7 +85,20 @@
             }
             
         },
+        watch: {
+            'form.initialWeight': (val) => {
+                console.log(val)
+            }
+        },
         methods: {
+            updateInitialWeight(val) {
+                if(val) 
+                    this.form.initialWeight = parseFloat(val.replace(',', '.'));
+            },
+            updateDesiredWeight(val) {
+                if(val) 
+                    this.form.desiredWeight = parseFloat(val.replace(',', '.'));
+            },
             updateEndDate(event) {
                 this.form.endDate = event;
             },
@@ -114,9 +126,6 @@
                 
                 EventBus.$emit('trackingPeriodCreated', true);
             }
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
         
     }
@@ -124,7 +133,7 @@
 
 <style>
     .calendar-header-size > header {
-        height: 10vh;
+        height: 3rem;
         background: rgba(12, 231, 247, 0.685);
     }
 </style>

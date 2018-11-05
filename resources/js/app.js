@@ -36,6 +36,10 @@ Vue.component(
     'add-tracking-today', require('./components/TrackingToday.vue')
 );
 
+Vue.component(
+    'weight-input', require('./components/WeightInput.vue')
+);
+
 // Import vform
 
 import { Form, HasError, AlertError } from 'vform';

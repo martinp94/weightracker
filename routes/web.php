@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
-Route::get('/', 'AppController@index')->middleware('verified');
+Route::get('/', 'AppController@index');
 
 
 // Create Tracking Period
